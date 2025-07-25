@@ -1,0 +1,50 @@
+---
+# Notice: Make sure you have MDX extension installed in Visual Studio Code to see syntax highlighting
+
+# Title
+title: Valašské panenky
+# Date
+date: '2025-03-25'
+# Categories
+categories: ['jednostránkový web']
+# Images
+images:
+  # Item thumbnail
+  thumbnail: /partials/portfolio/item-6/thumbnail.jpg
+  # A list of iamges to be displayed in a slider
+  gallery:
+    [
+      '/partials/portfolio/item-6/item-1.jpg',
+      '/partials/portfolio/item-6/item-2.jpg',
+      '/partials/portfolio/item-6/item-3.jpg',
+      '/partials/portfolio/item-6/item-4.jpg',
+      '/partials/portfolio/item-6/item-5.jpg',
+    ]
+---
+<PortfolioLightboxLayout
+  contentInfo={
+    <LightboxContentInfo
+      projectUrl={
+        // Button URL
+        'https://www.valasskepanenky.cz/'
+      }
+      articleInfo={
+        // Details part as key-value pairs
+        [
+          {key: 'Client', value: 'Alena Dynková'},
+          {key: 'Categories', value: <CategoriesToText />},
+          {key: 'Date', value: <DateToText />},
+          {key: 'Technologies', value: 'HTML5, CSS, JS'}
+        ]
+      }
+    />
+  }
+  carousel={
+    <LightboxCarousel />
+}>
+Webová prezentace Aleny Dynkové z Valašských Klobouk, která se věnuje tvorbě originálních valašských panenek. Stránky slouží jako virtuální galerie, kde si návštěvníci mohou prohlédnout její tvorbu, dozvědět se o plánovaných výstavách nebo si zakoupit panenky s valašským šarmem.
+
+Na webu jsem pracoval na návrhu struktury, výběru vhodné šablony a celkovém vizuálním stylu, který ladí s jemným a tradičním charakterem samotné tvorby. Cílem bylo vytvořit prostor, který citlivě a přehledně představí svět panenek, valašských tradic a autorské práce paní Dynkové.
+
+
+</PortfolioLightboxLayout>

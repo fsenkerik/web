@@ -1,0 +1,46 @@
+---
+# Notice: Make sure you have MDX extension installed in Visual Studio Code to see syntax highlighting
+
+# Title
+title: Firemní finance
+# Date
+date: '2023-08-25'
+# Categories
+categories: ['jednostránkový web']
+# Images
+images:
+  # Item thumbnail
+  thumbnail: /partials/portfolio/item-4/thumbnail.jpg
+  # A list of iamges to be displayed in a slider
+  gallery:
+    [
+      '/partials/portfolio/item-4/item-4.jpg',
+      '/partials/portfolio/item-4/item-1.jpg',
+      '/partials/portfolio/item-4/item-2.jpg',
+      '/partials/portfolio/item-4/item-3.jpg',
+      '/partials/portfolio/item-4/item-5.jpg',
+    ]
+---
+<PortfolioLightboxLayout
+  contentInfo={
+    <LightboxContentInfo
+      projectUrl={
+        // Button URL
+        'https://rmbk.cz/'
+      }
+      articleInfo={
+        // Details part as key-value pairs
+        [
+          {key: 'Client', value: 'Michal Rambousek'},
+          {key: 'Categories', value: <CategoriesToText />},
+          {key: 'Date', value: <DateToText />},
+          {key: 'Technologies', value: 'HTML5, SCSS, JS'}
+        ]
+      }
+    />
+  }
+  carousel={
+    <LightboxCarousel />
+}>
+Web finanční skupiny RMBK, specializované na komplexní financování firem. Při tvorbě jsme se zaměřili na seriózní a sofistikovaný vzhled, který buduje důvěru a kredibilitu u klientů i partnerů. Můj podíl zahrnoval kompletní návrh struktury, výběr šablony, úpravu vizuální identity a tvorbu obsahové architektury tak, aby klíčové služby (úvěry, leasing, investice) byly přehledně a přitažlivě prezentovány.
+</PortfolioLightboxLayout>

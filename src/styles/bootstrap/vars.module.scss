@@ -1,0 +1,76 @@
+/*
+This file defines Bootstrap configuration
+*/
+
+// Breakpoint sizes for container widths
+$container-max-widths: (
+  'sm': 576px,
+  'md': 768px,
+  'lg': 992px,
+  'xl': 1200px,
+);
+
+// Breakpoint sizes for grid system
+$grid-breakpoints: (
+  'xs': 0,
+  'sm': 576px,
+  'md': 768px,
+  'lg': 992px,
+  'xl': 1200px,
+);
+
+// Color scheme to use
+$use-scheme: 'darkred';
+
+// Color to use for text/elements on top of selected color
+$invert: #fff;
+
+// Map of available color themes
+$theme-colors: (
+  'blue': #007bff,
+  'blueviolet': #2c31ff,
+  'brown': #664c43,
+  'cyan': #17a2b8,
+  'dark': #333,
+  'darkblue': #3365b0,
+  'darkmagenta': #a435b7,
+  'darkpink': #c93e70,
+  'darkred': #bf2a3d,
+  'green': #28a745,
+  'indigo': #6610f2,
+  'moodyblue': #6f73d2,
+  'nightskyblue': #3460d1,
+  'orange': #fd7e14,
+  'pink': #e83e8c,
+  'purple': #6f42c1,
+  'red': #dc3545,
+  'redpink': #ee3158,
+  'royalblue': #4770d9,
+  'tangopink': #e16f7c,
+  'teal': #20c997,
+  'yellowgreen': #78b230,
+);
+
+// Select color from theme colors based on selected scheme
+$selected-color: map-get($theme-colors, $use-scheme);
+
+:export {
+  @each $key, $value in $grid-breakpoints {
+    @if ($value and $value > 0) {
+      #{unquote('breakpoint-max-#{$key}')}: $value - 0.02;
+    }
+  }
+
+  @each $key, $value in $grid-breakpoints {
+    @if ($value !=0) {
+      #{unquote('breakpoint-min-#{$key}')}: $value;
+    }
+  }
+
+  @each $key, $value in $theme-colors {
+    #{unquote('theme-#{$key}')}: $value;
+  }
+
+  theme: #{unquote($use-scheme)};
+  invert: $invert;
+}

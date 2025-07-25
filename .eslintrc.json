@@ -1,0 +1,21 @@
+{
+  "extends": [
+    "eslint:recommended",
+    "next/core-web-vitals",
+    "airbnb-base",
+    "prettier",
+    "plugin:import/errors"
+  ],
+  "settings": {
+    "import/resolver": {
+      "alias": {
+        "extensions": [".js", ".jsx"],
+        "map": [
+          ["root", "."],
+          ["src", "./src"]
+        ]
+      }
+    }
+  },
+  "ignorePatterns": ["node_modules/", ".next", "next.config.js"]
+}

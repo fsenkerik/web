@@ -1,0 +1,24 @@
+/*
+This file sets Bootstrap configuration
+*/
+
+// Import variable overrides
+@use 'vars.module';
+
+// Import Bootstrap with custom variables
+@use '/node_modules/bootstrap/scss/bootstrap' with (
+  // Override grid breakpoints
+  $grid-breakpoints: vars.$grid-breakpoints,
+
+  // Set custom gutter width
+  $grid-gutter-width: 30px,
+
+  // Disable smooth scrolling
+  $enable-smooth-scroll: false,
+
+  // Override container max widths
+  $container-max-widths: vars.$container-max-widths,
+
+  // Override primary theme color
+  $theme-colors: ('primary': vars.$selected-color)
+);

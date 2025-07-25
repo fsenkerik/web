@@ -1,0 +1,10 @@
+{
+  "recommendations": [
+    "EditorConfig.EditorConfig",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "styled-components.vscode-styled-components",
+    "dsznajder.es7-react-js-snippets",
+    "unifiedjs.vscode-mdx"
+  ]
+}
