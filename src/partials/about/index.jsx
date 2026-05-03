@@ -71,7 +71,7 @@ const About = (props) => (
           <Row>
             <Col className='_info' xs='12' md='6'>
               <span>Věk:</span>
-              <p>27</p>
+              <p>28</p>
             </Col>
             <Col className='_info' xs='12' md='6'>
               <span>Místo:</span>
