@@ -161,6 +161,7 @@ const parseAllMdx = async (dir) => {
               scope: {
                 frontmatter,
               },
+              blockJS: false,
             }),
           ),
       ),
