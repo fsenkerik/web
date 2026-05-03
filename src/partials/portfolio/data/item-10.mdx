@@ -1,0 +1,48 @@
+---
+
+# Notice: Make sure you have MDX extension installed in Visual Studio Code to see syntax highlighting
+
+# Title
+title: Kartona
+# Date
+date: '2026-05-03'
+# Categories
+categories: ['více stránkový web']
+# Images
+images:
+  # Item thumbnail
+  thumbnail: /partials/portfolio/item-10/01.png
+  # A list of images to be displayed in a slider
+  gallery:
+    [
+      '/partials/portfolio/item-10/01.png',
+      '/partials/portfolio/item-10/02.png',
+      '/partials/portfolio/item-10/03.png',
+      '/partials/portfolio/item-10/04.png',
+      '/partials/portfolio/item-10/05.png',
+      '/partials/portfolio/item-10/06.png',
+    ]
+---
+<PortfolioLightboxLayout
+  contentInfo={
+    <LightboxContentInfo
+      projectUrl={
+        // Button URL
+        'https://www.kartona.eu/'
+      }
+      articleInfo={
+        // Details part as key-value pairs
+        [
+          {key: 'Client', value: 'Kartona'},
+          {key: 'Kategorie', value: <CategoriesToText />},
+          {key: 'Datum', value: <DateToText />},
+          {key: 'Technologie', value: 'HTML5, CSS, JS, PHP'}
+        ]
+      }
+    />
+  }
+  carousel={
+    <LightboxCarousel />
+}>
+Vícestr ánkový web pro tradiční karlovarský výrobce kartonových obalů s více než 40letou historií. Cílem bylo vytvořit přehlednou a důvěryhodnou prezentaci, která odráží odbornost firmy a usnadňuje orientaci v rozsáhlém portfoliu výrobků. Web zahrnuje sekce produktového katalogu členěného do kategorií, edukační stránku o vlnité lepence a kontaktní formulář. Důraz byl kladen na čistý design, snadnou navigaci a přizpůsobení potřebám B2B klientů.
+</PortfolioLightboxLayout>
