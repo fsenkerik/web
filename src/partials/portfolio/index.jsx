@@ -27,6 +27,8 @@ import Shuffle from 'shufflejs'
 import MdxRenderer from 'root/src/components/mdx-renderer'
 import { capitalizeFirstLetter } from 'root/utils'
 import Lightbox from 'root/src/components/lightbox'
+import LangBlock from 'root/src/components/lang-block'
+import { useLanguage } from 'root/src/context/LanguageContext'
 import styled from './style'
 
 // Define where the MDX files are located
@@ -39,25 +41,29 @@ const Context = createContext({})
 Renders a navigation bar for filtering portfolio items by category
 */
 const MansoryNav = (props) => {
-  // State variable to track currently selected nav item index
   const [navIndex, setNavIndex] = useState(0)
+  const { t } = useLanguage()
 
-  // Create list of categories from props, with 'All' as first item
-  const list = [...['Vše'], ...Array.from(props.list).sort()]
+  // Keep Czech values as internal filter keys; display translated labels
+  const rawList = Array.from(props.list).sort()
+  const list = [null, ...rawList] // null = "All"
+
   return (
     <Nav css={styled.MansoryNav} as='ul'>
       {list.map((category, index) => (
         <Nav.Link
-          // Add active class if item index matches navIndex
           className={cx({ '--active': index === navIndex }, '_item')}
-          key={category}
+          key={category ?? '__all__'}
           onClick={() => {
-            // Call props callback to set category filter
             props.setCategory(index === 0 ? Shuffle.ALL_ITEMS : category)
             setNavIndex(index)
           }}
         >
-          {capitalizeFirstLetter(category)}
+          {index === 0
+            ? t.portfolio.all
+            : capitalizeFirstLetter(
+                t.portfolio.categories[category] || category,
+              )}
         </Nav.Link>
       ))}
     </Nav>
@@ -66,15 +72,13 @@ const MansoryNav = (props) => {
 
 // Component that represents a single item
 const MansoryItem = (props) => {
-  // Get dispatch function from context
   const { dispatch } = useContext(Context)
+  const { t: portfolioT } = useLanguage()
 
-  // Click handler to populate the data state, causing the lightbox to show
   const clickEvent = () => {
     dispatch({ type: 'data', data: props.node })
   }
 
-  // State to track overlay visibility
   const [showOverlay, setShowOverlay] = useState(false)
 
   // Throw error if processed images are missing
@@ -139,7 +143,7 @@ const MansoryItem = (props) => {
         >
           <div className='_content'>
             <h6 className='_title'>{props.scope.frontmatter?.title}</h6>
-            <span className='_action'>Více informací</span>
+            <span className='_action'>{portfolioT.moreInfo}</span>
           </div>
         </div>
       </div>
@@ -266,12 +270,11 @@ const LightboxCarousel = () => {
  along with a button
 */
 const LightboxContentInfo = (props) => {
-  // Destructure props
   const { projectUrl, articleInfo } = props
+  const { t } = useLanguage()
 
   return (
     <>
-      {/* Map over article info to display as list */}
       <ul css={styled.LightboxContentInfo} className='list-inline'>
         {articleInfo.map((item, i) => (
           <li key={i} className='list-inline-item _single-info'>
@@ -280,9 +283,8 @@ const LightboxContentInfo = (props) => {
           </li>
         ))}
       </ul>
-      {/* Button part */}
       <Button target='_blank' href={projectUrl}>
-        Navštívit web
+        {t.portfolio.visitSite}
       </Button>
     </>
   )
@@ -334,18 +336,17 @@ const PortfolioLightbox = () => {
     // Carousel component
     LightboxCarousel,
 
-    // Component to format categories as text
+    // Component to format categories as text (translated)
     CategoriesToText: () => {
-      // Map categories to capitalized strings
+      const { t } = useLanguage()
       const treatedArray = state.data.scope.frontmatter.categories.map(
-        (element) => capitalizeFirstLetter(element),
+        (element) =>
+          capitalizeFirstLetter(t.portfolio.categories[element] || element),
       )
 
-      // Return single category wrapped in link
       if (treatedArray.length === 1)
         return <a className='link'>{treatedArray[0]}</a>
 
-      // Return multiple categories joined with commas and wrapped in links
       return treatedArray.reduce((prev, curr) => (
         <>
           <a className='link'>{prev}</a>, <a className='link'>{curr}</a>
@@ -353,10 +354,17 @@ const PortfolioLightbox = () => {
       ))
     },
 
-    // Component to format date as text
-    // ...existing code...
-    DateToText: () => <DateToText date={state.data.scope.frontmatter.date} />,
-    // ...existing code...
+    DateToText: () => {
+      const { t } = useLanguage()
+      return (
+        <DateToText
+          date={state.data.scope.frontmatter.date}
+          locale={t.dateLocale}
+        />
+      )
+    },
+
+    LangBlock,
   }
 
   // Return lightbox component
@@ -414,10 +422,9 @@ const Portfolio = (props) => {
     }
   }
 
-  // Use reducer hook for state management
   const [state, dispatch] = useReducer(stateReducer, initialState)
+  const { t } = useLanguage()
 
-  // Pass data and state to child components
   const contextData = {
     fetchedData: data,
     state,
@@ -428,8 +435,8 @@ const Portfolio = (props) => {
     <SectionWrapper
       css={styled.Portfolio}
       headerData={{
-        title: 'Portfolio',
-        description: 'Mrkni na některé z mých projektů',
+        title: t.portfolio.sectionTitle,
+        description: t.portfolio.sectionDesc,
       }}
       {...otherProps}
     >

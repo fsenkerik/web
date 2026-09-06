@@ -12,48 +12,31 @@ import { Nav as BSNav, Navbar } from 'react-bootstrap'
 import SimpleBar from 'simplebar-react'
 import Image from 'next/image'
 import authorImg from 'root/public/partials/nav/avatar.jpg'
+import LanguageSwitcher from 'root/src/components/language-switcher'
+import { useLanguage } from 'root/src/context/LanguageContext'
 import styled from './style'
 
 // Mobile navbar component
 const MobileNav = ({ children }) => {
-  // Ref for navbar element
   const navbarRef = useRef(null)
-
-  // State to manage the expansion status of the navbar
   const [expanded, setExpanded] = useState(false)
-
-  // Ref for toggle button
   const navbarToggleRef = useRef(null)
-
-  // Ref for menu
   const NavbarMenuRef = useRef(null)
 
-  // Navbar toggler
   const toggleMobileNav = () => {
     setExpanded((preValue) => !preValue)
   }
 
   useEffect(() => {
-    // Function to handle clicks on the navbar toggle
     function handleToggleClick(event) {
-      // Check if click was on navbar toggle element
       const targetInToggle = navbarToggleRef?.current?.contains(event.target)
-
-      // If navbar is collapsed and click was on toggle part, expand it
       if (!expanded && targetInToggle) {
         toggleMobileNav()
-      }
-
-      // If navbar is already expanded, collapse it
-      else if (expanded) {
+      } else if (expanded) {
         toggleMobileNav()
       }
     }
-
-    // Add mouseup event listener to document
     document.addEventListener('mouseup', handleToggleClick)
-
-    // Cleanup the event listener
     return () => {
       document.removeEventListener('mouseup', handleToggleClick)
     }
@@ -71,7 +54,7 @@ const MobileNav = ({ children }) => {
     >
       <div style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
         <Image
-          src='/logo_top_menu.png' // nebo "/partials/nav/Logo_cerne.png" podle bodu 2
+          src='/logo_top_menu.png'
           alt='Logo'
           width={57}
           height={57}
@@ -82,6 +65,10 @@ const MobileNav = ({ children }) => {
             marginTop: '-15px',
           }}
         />
+        {/* Language switcher in mobile top bar — always visible, not in hamburger */}
+        <div style={{ marginLeft: 12, marginTop: -15, zIndex: 1500, position: 'relative' }}>
+          <LanguageSwitcher />
+        </div>
         <div style={{ marginLeft: 'auto' }}>
           <Navbar.Toggle
             className={`_toggler${expanded ? ' _toggler--active' : ''}`}
@@ -97,10 +84,7 @@ const MobileNav = ({ children }) => {
         </div>
       </div>
 
-      {/* Navbar collapse */}
-      {/* Navbar collapse */}
       <Navbar.Collapse className='_nav' id='nav'>
-        {/* Logo uprostřed */}
         <div
           className='_mobile-logo'
           style={{
@@ -123,7 +107,6 @@ const MobileNav = ({ children }) => {
         <BSNav ref={NavbarMenuRef} className='me-auto _menu'>
           {children}
         </BSNav>
-        {/* Sociální ikony dole */}
         <div
           className='_mobile-social'
           style={{
@@ -155,24 +138,14 @@ const MobileNav = ({ children }) => {
   )
 }
 
-// Component to render the sidebar
-// ...existing code...
 const Sidebar = ({ children }) => {
-  // Data to populate sidebar
-  const data = {
-    toggler: 'Menu',
-    status: 'K dispozici',
-    author: 'Šenkeřík Filip',
-  }
+  const { t } = useLanguage()
 
   return (
     <header css={styled.Sidebar}>
-      {/* Custom scrollbar for the sidebar */}
       <SimpleBar className='d-none d-lg-flex justify-content-center align-items-center _wrapper'>
         <div>
-          {/* Header part */}
           <div className='_header'>
-            {/* Avatar image */}
             <a style={{ overflow: 'hidden' }} href='#home'>
               <Image
                 className='_avatar'
@@ -185,26 +158,22 @@ const Sidebar = ({ children }) => {
                 priority={true}
               />
             </a>
-
-            {/* Author name */}
-            <span className='_name'>{data.author}</span>
-
-            {/* Author status */}
-            <p className='_status'>{data.status}</p>
+            <span className='_name'>Šenkeřík Filip</span>
+            <p className='_status'>{t.sidebar.status}</p>
           </div>
 
-          {/*  Menu part */}
           <div className='_menu'>
-            {/*  Menu items container */}
             <div className='_list'>{children}</div>
+          </div>
+
+          {/* Language switcher in sidebar below nav items */}
+          <div style={{ display: 'flex', justifyContent: 'center', marginTop: 16 }}>
+            <LanguageSwitcher />
           </div>
         </div>
         <div
           style={{ display: 'flex', flexDirection: 'column', height: '100%' }}
         >
-          {/* Horní logo/profilovka */}
-
-          {/* Spodní logo */}
           <div
             className='_sidebar-logo'
             style={{
@@ -241,13 +210,6 @@ const Sidebar = ({ children }) => {
   )
 }
 
-// ...existing code...
-
-// ...data a další kód...
-
-// ...existing code...
-
-// Main component which renders both mobile navbar and sidebar
 const Nav = ({ children }) => (
   <>
     <MobileNav>{children}</MobileNav>

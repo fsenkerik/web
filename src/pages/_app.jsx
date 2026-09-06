@@ -11,6 +11,7 @@ import styled from 'root/src/styles/global'
 import { useState, useEffect } from 'react'
 import { css, Global } from '@emotion/react'
 import Preloader from '../components/preloader'
+import { LanguageProvider } from 'root/src/context/LanguageContext'
 
 // Defines elements to be included in the <head>
 export const HeadContent = () => (
@@ -38,7 +39,7 @@ const MyApp = ({ Component, pageProps }) => {
     }, 1000)
   }, [])
   return (
-    <>
+    <LanguageProvider>
       {/* Displays a preloader when the page is still loading */}
       <Preloader
         loading={loading}
@@ -53,7 +54,7 @@ const MyApp = ({ Component, pageProps }) => {
       />
       <Global styles={styled.Global} />
       <Component {...pageProps} />
-    </>
+    </LanguageProvider>
   )
 }
 

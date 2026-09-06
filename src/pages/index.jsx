@@ -12,25 +12,29 @@ import Contact from 'root/src/partials/contact'
 import Footer from 'root/src/partials/footer'
 import parseAllMdx from 'root/src/lib/parseAllMdx'
 import Metadata from 'root/src/metadata'
+import { useLanguage } from 'root/src/context/LanguageContext'
 
-const HomeImage = ({ portfolioData }) => (
-  /* Wrap all sections within a scroll-wrapper that adds a functional navbar/sidebar feature */
-  <ScrollWrapper>
-    {/* Include website metadata */}
-    <Metadata />
+const HomeImage = ({ portfolioData }) => {
+  const { t } = useLanguage()
+  return (
+    /* Wrap all sections within a scroll-wrapper that adds a functional navbar/sidebar feature */
+    <ScrollWrapper>
+      {/* Include website metadata */}
+      <Metadata />
 
-    {/* Hero section with an image background */}
-    <Hero nav='Domů' id='home' variant='particles' preset='lines' />
+      {/* Hero section with an image background */}
+      <Hero nav={t.nav.home} id='home' variant='particles' preset='lines' />
 
-    {/* Include the rest of sections, some with passed MDX data */}
-    <About nav='O mně' id='about' />
-    <Services nav='Služby' id='services' />
-    <Hire id='hire' />
-    <Portfolio nav='Portfolio' id='portfolio' data={portfolioData} />
-    <Contact nav='Kontakt' id='contact' />
-    <Footer id='footer' />
-  </ScrollWrapper>
-)
+      {/* Include the rest of sections, some with passed MDX data */}
+      <About nav={t.nav.about} id='about' />
+      <Services nav={t.nav.services} id='services' />
+      <Hire id='hire' />
+      <Portfolio nav={t.nav.portfolio} id='portfolio' data={portfolioData} />
+      <Contact nav={t.nav.contact} id='contact' />
+      <Footer id='footer' />
+    </ScrollWrapper>
+  )
+}
 
 export default HomeImage
 

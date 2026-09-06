@@ -7,37 +7,29 @@ import React, { useRef, useReducer } from 'react'
 import Swal from 'sweetalert2'
 import emailjs from '@emailjs/browser'
 import { Row, Col } from 'react-bootstrap'
-
 import Form from 'react-bootstrap/Form'
 import * as z from 'zod'
 import { css } from '@emotion/react'
 import SectionWrapper from 'root/src/components/section-wrapper'
-
 import Button from 'root/src/components/button'
+import { useLanguage } from 'root/src/context/LanguageContext'
 import styled from './style'
 
-// Define schema for EmailJS configuration
 export const emailjsParamsSchema = z.object({
   serviceId: z.string().min(1),
   templateId: z.string().min(1),
   publicKey: z.string().min(1),
 })
 
-/*
-Define EmailJS configuration
-Make sure the values are replaced with your own EmailJS credentials.
-Read the documentation for more information
-*/
 const emailjsParams = {
   serviceId: 'service_g6pbylj',
   templateId: 'template_4q9vmxs',
   publicKey: 'st9Y8CHA280rYb6B6',
 }
 
-// Define initial state
-const initialState = {
+const buildInitialState = (submitLabel) => ({
   submit: {
-    children: 'Odeslat',
+    children: submitLabel,
     css: css``,
     disabled: false,
   },
@@ -46,12 +38,11 @@ const initialState = {
       display: none !important;
     `,
   },
-}
+})
 
 const stateReducer = (state, action) => {
   switch (action.type) {
     case 'loading':
-      // Return loading state
       return {
         submit: {
           children: 'Wait...',
@@ -67,9 +58,7 @@ const stateReducer = (state, action) => {
           `,
         },
       }
-
     case 'success':
-      // Return success state
       return {
         submit: {
           children: 'Success',
@@ -88,7 +77,6 @@ const stateReducer = (state, action) => {
         },
       }
     case 'failure':
-      // Return failure state
       return {
         submit: {
           children: 'Error',
@@ -107,24 +95,25 @@ const stateReducer = (state, action) => {
         },
       }
     default:
-      return initialState
+      return action.initial || state
   }
 }
 
 const Contact = (props) => {
-  // Ref to store form DOM element
   const form = useRef()
+  const { t } = useLanguage()
+  const c = t.contact
 
-  // State management with reducer
-  const [state, dispatch] = useReducer(stateReducer, initialState)
+  const [state, dispatch] = useReducer(
+    stateReducer,
+    buildInitialState(c.submitBtn),
+  )
 
-  // Validate EmailJS params
   emailjsParamsSchema.parse(emailjsParams)
 
   const sendEmail = (e) => {
     e.preventDefault()
 
-    // Vlastní validace
     const formData = new FormData(form.current)
     const name = formData.get('name')
     const email = formData.get('email')
@@ -134,8 +123,8 @@ const Contact = (props) => {
     if (!name || !email || !subject || !message) {
       Swal.fire({
         icon: 'warning',
-        title: 'Vyplňte všechna pole!',
-        text: 'Prosím, vyplňte všechna pole formuláře.',
+        title: c.validation.missingFields.title,
+        text: c.validation.missingFields.text,
       })
       return
     }
@@ -143,8 +132,8 @@ const Contact = (props) => {
     if (!emailRegex.test(email)) {
       Swal.fire({
         icon: 'warning',
-        title: 'Neplatný email!',
-        text: 'Zadejte prosím platnou emailovou adresu.',
+        title: c.validation.invalidEmail.title,
+        text: c.validation.invalidEmail.text,
       })
       return
     }
@@ -162,13 +151,13 @@ const Contact = (props) => {
         () => {
           Swal.fire({
             icon: 'success',
-            title: 'Zpráva odeslána!',
-            text: 'Děkuji za zprávu, ozvu se co nejdříve.',
+            title: c.validation.success.title,
+            text: c.validation.success.text,
           })
           dispatch({ type: 'success' })
           form.current.reset()
           setTimeout(() => {
-            dispatch({ type: null })
+            dispatch({ type: null, initial: buildInitialState(c.submitBtn) })
           }, 6000)
         },
         (error) => {
@@ -176,12 +165,12 @@ const Contact = (props) => {
           console.error(error)
           Swal.fire({
             icon: 'error',
-            title: 'Chyba při odesílání',
-            text: 'Zprávu se nepodařilo odeslat. Zkuste to prosím později.',
+            title: c.validation.error.title,
+            text: c.validation.error.text,
           })
           dispatch({ type: 'failure' })
           setTimeout(() => {
-            dispatch({ type: null })
+            dispatch({ type: null, initial: buildInitialState(c.submitBtn) })
           }, 6000)
         },
       )
@@ -192,17 +181,15 @@ const Contact = (props) => {
       css={styled.Contact}
       altBg={true}
       headerData={{
-        title: 'Kontaktujte mě',
-        description: 'Neváhej mě kdykoli kontaktovat. Rád pomohu s projektem.',
+        title: c.sectionTitle,
+        description: c.sectionDesc,
       }}
       {...props}
     >
       <Row>
         <Col xs='12'>
-          {/* Form */}
           <Form onSubmit={sendEmail} ref={form}>
             <Row>
-              {/* Form fields */}
               <Form.Group
                 className='_group'
                 as={Col}
@@ -210,7 +197,11 @@ const Contact = (props) => {
                 xs='12'
                 controlId='formName'
               >
-                <Form.Control type='text' placeholder='Jméno' name='name' />
+                <Form.Control
+                  type='text'
+                  placeholder={c.namePlaceholder}
+                  name='name'
+                />
               </Form.Group>
 
               <Form.Group
@@ -220,7 +211,11 @@ const Contact = (props) => {
                 xs='12'
                 controlId='formEmail'
               >
-                <Form.Control type='text' placeholder='Email' name='email' />
+                <Form.Control
+                  type='text'
+                  placeholder={c.emailPlaceholder}
+                  name='email'
+                />
               </Form.Group>
 
               <Form.Group
@@ -231,7 +226,7 @@ const Contact = (props) => {
               >
                 <Form.Control
                   type='text'
-                  placeholder='O co se jedná'
+                  placeholder={c.subjectPlaceholder}
                   name='subject'
                 />
               </Form.Group>
@@ -245,16 +240,13 @@ const Contact = (props) => {
                 <Form.Control
                   as='textarea'
                   rows='5'
-                  placeholder='Zpráva'
+                  placeholder={c.messagePlaceholder}
                   name='message'
                 />
               </Form.Group>
 
               <Col xs='12'>
-                {/* Submit button */}
                 <Button className='_submit' type='submit' {...state.submit} />
-
-                {/* Submission Feedback */}
                 <p className='_feedback' {...state.feedback} />
               </Col>
             </Row>
