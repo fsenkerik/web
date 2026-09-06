@@ -169,10 +169,12 @@ const Sidebar = ({ children }) => {
         <div
           style={{ display: 'flex', flexDirection: 'column', height: '100%' }}
         >
-          {/* Language switcher centered between nav and logo */}
-          <div style={{ display: 'flex', justifyContent: 'center', margin: 'auto 0', marginBottom: 32 }}>
+          {/* Equal spacers keep flags centered between nav and logo */}
+          <div style={{ flex: 1 }} />
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
             <LanguageSwitcher />
           </div>
+          <div style={{ flex: 1 }} />
           <div
             className='_sidebar-logo'
             style={{
