@@ -1,7 +1,7 @@
-const DateToText = ({ date }) => {
+const DateToText = ({ date, locale = 'cs-CZ' }) => {
   if (!date) return null
   const d = new Date(date)
-  return d.toLocaleDateString('cs-CZ', {
+  return d.toLocaleDateString(locale, {
     day: 'numeric',
     month: 'long',
     year: 'numeric',
