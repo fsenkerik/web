@@ -165,19 +165,17 @@ const Sidebar = ({ children }) => {
           <div className='_menu'>
             <div className='_list'>{children}</div>
           </div>
+          <div style={{ display: 'flex', justifyContent: 'center', marginTop: 8, marginBottom: 20 }}>
+            <LanguageSwitcher />
+          </div>
         </div>
         <div
           style={{ display: 'flex', flexDirection: 'column', height: '100%' }}
         >
-          {/* Equal spacers keep flags centered between nav and logo */}
-          <div style={{ flex: 1 }} />
-          <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <LanguageSwitcher />
-          </div>
-          <div style={{ flex: 1 }} />
           <div
             className='_sidebar-logo'
             style={{
+              marginTop: 'auto',
               marginBottom: 32,
               width: '100%',
               display: 'flex',
