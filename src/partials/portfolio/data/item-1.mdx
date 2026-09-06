@@ -1,7 +1,4 @@
 ---
-
-
-
 # Notice: Make sure you have MDX extension installed in Visual Studio Code to see syntax highlighting
 
 # Title
@@ -22,7 +19,6 @@ images:
       '/partials/portfolio/item-1/item-3.jpg',
       '/partials/portfolio/item-1/item-4.jpg',
       '/partials/portfolio/item-1/item-5.jpg',
-
     ]
 ---
 <PortfolioLightboxLayout
@@ -36,9 +32,9 @@ images:
         // Details part as key-value pairs
         [
           {key: 'Client', value: 'BODL'},
-          {key: 'Kategorie', value: <CategoriesToText />},
-          {key: 'Datum', value: <DateToText />},
-          {key: 'Technologie', value: 'Shoptet'}
+          {key: 'Categories', value: <CategoriesToText />},
+          {key: 'Date', value: <DateToText />},
+          {key: 'Technologies', value: 'Shoptet'}
         ]
       }
     />
@@ -46,6 +42,10 @@ images:
   carousel={
     <LightboxCarousel />
 }>
-
+<LangBlock lang="cs">
 E‑shop značky BODL byl vytvořen na platformě Shoptet. Na projektu jsem pracoval jako jeden ze spoluzakladatelů a měl jsem na starost kompletní návrh struktury, výběr šablony, úpravy designu i nastavení funkčních prvků. Důraz jsme kladli na přehlednost, jednoduché ovládání a čistou vizuální prezentaci produktů. Web slouží jako hlavní prodejní kanál naší značky zaměřené na kvalitní streetwear a doplňky.
+</LangBlock>
+<LangBlock lang="en">
+The BODL e-shop was built on the Shoptet platform. I worked on the project as one of the co-founders, taking responsibility for the complete site structure, template selection, design adjustments, and functional setup. We focused on clarity, intuitive navigation, and a clean visual presentation of products. The site serves as the main sales channel for our brand focused on quality streetwear and accessories.
+</LangBlock>
 </PortfolioLightboxLayout>
