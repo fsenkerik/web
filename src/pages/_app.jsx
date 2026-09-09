@@ -12,6 +12,7 @@ import { useState, useEffect } from 'react'
 import { css, Global } from '@emotion/react'
 import Preloader from '../components/preloader'
 import { LanguageProvider } from 'root/src/context/LanguageContext'
+import CookieConsent from 'root/src/components/cookie-consent'
 
 // Defines elements to be included in the <head>
 export const HeadContent = () => (
@@ -53,6 +54,7 @@ const MyApp = ({ Component, pageProps }) => {
         backgroundColor='#0e0e0e'
       />
       <Global styles={styled.Global} />
+      <CookieConsent />
       <Component {...pageProps} />
     </LanguageProvider>
   )

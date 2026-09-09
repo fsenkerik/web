@@ -15,7 +15,7 @@ const translations = {
       sectionTitle: 'O mně',
       subtitle: 'Kdo jsem?',
       title: 'Jmenuji se Šenkeřík Filip — jsem webový vývojář a pedagog',
-      bio: 'Jsem pedagog na Masarykově gymnáziu, kde se snažím studentům předat nejen znalosti, ale hlavně je nadchnout pro informatiku a technologie. Kromě výuky se věnuji tvorbě webových stránek – od návrhu přes kódování, zabezpečení až po samotné zveřejnění na internetu. V práci se snažím být hlavně spolehlivý a vstřícný. Baví mě hledat řešení, která dávají smysl a zároveň respektují představy lidí, se kterými spolupracuji. Věřím, že dobrý výsledek vzniká z dobré domluvy.',
+      bio: 'Jsem pedagog na Masarykově gymnáziu, kde se snažím studentům předat nejen znalosti, ale hlavně je nadšchnout pro informatiku a technologie. Kromě výuky se věnuji tvorbě webových stránek – od návrhu přes kódování, zabezpečení až po samotné zveřejnění na internetu. V práci se snažím být hlavně spolehlivý a vstřícný. Baví mě hledat řešení, která dávají smysl a zároveň respektují představy lidí, se kterými spolupracuji. Věřím, že dobrý výsledek vzniká z dobré domluvy.',
       nameLabel: 'Jméno:',
       emailLabel: 'Email:',
       ageLabel: 'Věk:',
@@ -26,7 +26,7 @@ const translations = {
     },
     services: {
       sectionTitle: 'Služby',
-      sectionDesc: 'Služby, které nabízím',
+      sectionDesc: 'Služby, které nabízim',
       items: [
         {
           title: 'Designové trendy',
@@ -42,7 +42,7 @@ const translations = {
         },
         {
           title: 'Nastavení interaktivity',
-          desc: 'Formuláře, tlačítka nebo galerie nastavím tak, aby vše na webu fungovalo hladce a plynule.',
+          desc: 'Formuláře, tlačítka nebo galerie nastavím tak, aby vše na webu fungovalo hladkě a plynule.',
         },
         {
           title: 'Responzivita',
@@ -56,7 +56,7 @@ const translations = {
     },
     hire: {
       title: 'Chceš web, co bude fungovat i vypadat dobře?',
-      desc: 'Ať už máš jasnou představu, nebo jen myšlenku v hlavě, probereme to. Jsem otevřený novým spolupracím i zajímavým nápadům.',
+      desc: 'Ať už máš jasnou představu, nebo jen myšlenku v hlavě, probereme to. Jsem otevřený novým spoluprácím i zajímavým nápadům.',
       btn: 'Napiš mi',
     },
     portfolio: {
@@ -100,6 +100,12 @@ const translations = {
     },
     sidebar: {
       status: 'K dispozici',
+    },
+    cookies: {
+      title: 'Tento web používá cookies',
+      text: 'Používáme cookies ke zlepšení vašeho zážitku z prohlížení a k analýze návštěvnosti. Nezbytné cookies jsou vždy aktivní. Kliknutím na „Přijmout vše“ souhlasíte s ukládáním analytických a funkčních cookies.',
+      acceptAll: 'Přijmout vše',
+      essentialOnly: 'Pouze nezbytné',
     },
     dateLocale: 'cs-CZ',
   },
@@ -204,6 +210,12 @@ const translations = {
     },
     sidebar: {
       status: 'Available',
+    },
+    cookies: {
+      title: 'This website uses cookies',
+      text: 'We use cookies to improve your browsing experience and analyse site traffic. Essential cookies are always active. By clicking “Accept all” you consent to the storage of analytical and functional cookies.',
+      acceptAll: 'Accept all',
+      essentialOnly: 'Essential only',
     },
     dateLocale: 'en-GB',
   },
