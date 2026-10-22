@@ -26,7 +26,7 @@ const translations = {
     },
     services: {
       sectionTitle: 'Služby',
-      sectionDesc: 'Služby, které nabízim',
+      sectionDesc: 'Služby, které nabízím',
       items: [
         {
           title: 'Designové trendy',
