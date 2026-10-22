@@ -3,7 +3,7 @@ This is the Contact section. The contact form uses EmailJS API
 to send emails: https://www.emailjs.com
 */
 
-import React, { useRef, useReducer } from 'react'
+import React, { useRef, useReducer, useEffect } from 'react'
 import Swal from 'sweetalert2'
 import emailjs from '@emailjs/browser'
 import { Row, Col } from 'react-bootstrap'
@@ -108,6 +108,10 @@ const Contact = (props) => {
     stateReducer,
     buildInitialState(c.submitBtn),
   )
+
+  useEffect(() => {
+    dispatch({ type: null, initial: buildInitialState(c.submitBtn) })
+  }, [c.submitBtn])
 
   emailjsParamsSchema.parse(emailjsParams)
 

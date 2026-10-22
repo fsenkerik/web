@@ -42,7 +42,7 @@ const translations = {
         },
         {
           title: 'Nastavení interaktivity',
-          desc: 'Formuláře, tlačítka nebo galerie nastavím tak, aby vše na webu fungovalo hladkě a plynule.',
+          desc: 'Formuláře, tlačítka nebo galerie nastavím tak, aby vše na webu fungovalo hladce a plynule.',
         },
         {
           title: 'Responzivita',

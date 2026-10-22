@@ -90,7 +90,7 @@ const Footer = (props) => (
         />
       </Col>
       <Col as='p' xs='12' lg='7' className='_copyright-notice'>
-        Copyright © 2025 Šenkeřík Filip
+        Copyright © 2026 Šenkeřík Filip
       </Col>
     </Row>
   </SectionWrapper>
