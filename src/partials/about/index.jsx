@@ -55,8 +55,8 @@ const About = (props) => {
               <Col className='_info' xs='12' md='6'>
                 <span>{a.emailLabel}</span>
                 <p>
-                  <a href='mailto:f.senkerik98@gmail.com'>
-                    f.senkerik98@gmail.com
+                  <a href='mailto:info@senkerik-filip.cz'>
+                    info@senkerik-filip.cz
                   </a>
                 </p>
               </Col>
