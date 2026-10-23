@@ -70,7 +70,7 @@ const Footer = (props) => (
       <SingleBlock
         Icon={icons.SendSharp}
         content={
-          <a href='mailto:f.senkerik98@gmail.com'>f.senkerik98@gmail.com</a>
+          <a href='mailto:info@senkerik-filip.cz'>info@senkerik-filip.cz</a>
         }
         cols={{ xs: '12', sm: '4' }}
       />
